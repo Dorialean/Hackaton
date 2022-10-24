@@ -17,9 +17,35 @@ public class HomeController : Controller
 
     public IActionResult Index()
     {
-        
         return View();
     }
+    
+    public IActionResult Dashboard()
+    {
+        return View();
+    }
+
+    public IActionResult Courses()
+    {
+        return View();
+    }
+
+    public IActionResult Forum()
+    {
+        return View();
+    }
+
+    public IActionResult Timetable()
+    {
+        return View();
+    }
+
+    public IActionResult UserSpace()
+    {
+        return View();
+    }
+
+
 
     [ResponseCache(Duration = 0, Location = ResponseCacheLocation.None, NoStore = true)]
     public IActionResult Error()
