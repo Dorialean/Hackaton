@@ -1,0 +1,76 @@
+﻿<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>@ViewData["Title"] - Hackathon</title>
+    <link rel="stylesheet" href="~/lib/bootstrap/dist/css/bootstrap.min.css" />
+    <link rel="stylesheet" href="~/css/site.css"  />
+    <link rel="stylesheet" href="~/Hackathon.styles.css"  />
+    <link rel="shortcut icon" type="image/x-icon" href="~/img/chlogo.svg"  />
+</head>
+<body>
+    <header>
+        <nav class="navbar navbar-expand-sm navbar-toggleable-sm navbar-light bg-white border-bottom box-shadow mb-3">
+            <a class="col-1" asp-controller="Home" asp-action="Index">
+                <img src="~/img/chlogo.svg" />
+            </a>
+            <a class="col-1 ms-5" style="text-decoration:none;" asp-controller="Home" asp-action="Index">
+                <p class="cyberhacker-orange-text">
+                    <strong style="font-size:24px;">Student</strong><br />dashboard
+                </p>
+            </a>
+            <button id="dashboard" class="col btn rounded  btn-primary ms-4 me-3">
+                <div class="row">
+                    <div class="col">
+                        <img class="nav-icon-image mx-auto d-block" src="~/img/dashboard-white.png"   />
+                    </div>
+                    <p class="col-9 text-uppercase font-weight-bold  ">Dashboard</p>
+                </div>
+            </button>
+            <button id="blank-page" class="col btn rounded  btn-primary ms-3 me-3">
+                <div class="row">
+                    <div class="col">
+                        <img class="nav-icon-image mx-auto d-block" src="~/img/blank-page-white.png"  />
+                    </div>
+                    <p class="col-9 text-uppercase font-weight-bold">Курсы</p>
+                </div>                
+            </button>
+            <button id="speech" class="col btn rounded btn-primary ms-3 me-3">
+                <div class="row">
+                    <div class="col">
+                        <img class="nav-icon-image mx-auto d-block" src="~/img/speech-bubble-white.png"  />
+                    </div>
+                    <p class="col-8 text-uppercase font-weight-bold">Форум</p>
+                </div>
+            </button>
+            <button id="calendar" class="col btn rounded  btn-primary ms-3 me-3">
+                <div class="row">
+                    <div class="col">
+                        <img class="nav-icon-image mx-auto d-block" src="~/img/calendar-white.png"  />
+                    </div>
+                    <p class="col-9 text-uppercase font-weight-bold  ">Расписание</p>
+                </div>     
+            </button>
+            <button id="user-img" class="col btn rounded  btn-primary ms-3 me-5">
+                <div class="row">
+                    <div class="col">
+                        <img class="nav-icon-image mx-auto d-block" src="~/img/hacker-white.png"  />
+                    </div>
+                    <p class="col-9 text-uppercase font-weight-bold ">Личный кабинет</p>
+                </div>
+            </button>
+        </nav>
+    </header>
+    <div class="container">
+        <main role="main" class="pb-3">
+            @RenderBody()
+        </main>
+    </div>
+    <script src="~/lib/jquery/dist/jquery.min.js"></script>
+    <script src="~/lib/bootstrap/dist/js/bootstrap.bundle.min.js"></script>
+    <script src="~/js/site.js" ></script>
+    @await RenderSectionAsync("Scripts", required: false)
+</body>
+</html>
+

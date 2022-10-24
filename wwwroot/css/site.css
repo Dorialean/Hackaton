@@ -1,0 +1,38 @@
+﻿html {
+  font-size: 14px;
+}
+
+@media (min-width: 768px) {
+  html {
+    font-size: 16px;
+  }
+}
+
+html {
+  position: relative;
+  min-height: 100%;
+}
+
+body {
+    margin-bottom: 60px;
+    background-color: #F4F7FE;
+}
+
+.cyberhacker-orange-text {
+    color: #EF4622;
+}
+
+.btn-primary {
+    color: #F4F7FE;
+    background-color: #EF4622;
+    border-color: #EF4622;
+}
+    .btn-primary:hover, .btn-primary:focus, .btn-primary:active, .btn-primary.active, .open > .dropdown-toggle.btn-primary {
+        color: #EF4622 !important;
+        background-color: #F4F7FE !important;
+    }
+
+.nav-icon-image{    
+    max-height: 30px;
+    max-width: 40px;
+}

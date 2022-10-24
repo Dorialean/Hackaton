@@ -1,0 +1,33 @@
+﻿@using System.Text.Json
+@model UserAndData
+
+@{
+    ViewData["Title"] = "Страница регистрации";
+}
+
+
+<div class="row">
+    <img class="float-start" style="max-height:100px;max-width:100px;" src="~/img/chlogo.svg" asp-append-version=true />
+<div/>
+<div class="row rounded btn-light mt-3">
+    <div class="col">
+        @using (Html.BeginForm("Verification", "Register", FormMethod.Post, new { @Class = "container" }))
+        {
+            @Html.Label("Логин")
+            @Html.TextBoxFor(m => m.UserLogin.Username, new { @Class="row form-control mb-4" })
+
+            @Html.Label("Пароль")
+            @Html.PasswordFor(m => m.UserLogin.Password, new { @Class="row form-control" })
+
+            <input class="mt-5" type="submit" value="Отправить" />               
+        }
+    </div>
+    <div class="col">
+        <p class="row align-content-center" >Учебная платформа для <br/>
+            просмотра и загрузки лекций. <br/>
+            LMS - буп бип рандомный текст</p>
+        <img class="row float-end" style="max-height:350px;max-width:350px;" src="~/img/panda.png" asp-append-version=true />
+    </div>
+</div>
+
+
