@@ -1,11 +1,18 @@
 ﻿using Hackathon.Models;
+using Microsoft.AspNetCore.Authentication.Cookies;
 using Microsoft.EntityFrameworkCore;
+using Microsoft.Extensions.Configuration;
 
 var builder = WebApplication.CreateBuilder(args);
 
 // Add services to the container.
 builder.Services.AddControllersWithViews();
-if(Environment.OSVersion.ToString() == "Microsoft Windows NT 10.0.19043.0")
+builder.Services.AddAuthentication(CookieAuthenticationDefaults.AuthenticationScheme)
+    .AddCookie(options => options.LoginPath = "/Verification/Auth");
+builder.Services.AddAuthorization();
+
+//Which connection string use to connect to PostgreSQL
+if (Environment.OSVersion.ToString() == "Microsoft Windows NT 10.0.19043.0")
 {
     builder.Services.AddDbContext<HackathonDbContext>(options => options.UseNpgsql(builder.Configuration.GetConnectionString("PostgresPC")));
 }
@@ -15,7 +22,6 @@ else if (Environment.OSVersion.ToString() == "Linux")
 }
 else
 {
-    //Добавь сюда свою строку подключения
     builder.Services.AddDbContext<HackathonDbContext>(options => options.UseNpgsql(builder.Configuration.GetConnectionString("PostgresLaptop")));
 }
 
@@ -35,11 +41,12 @@ app.UseStaticFiles();
 
 app.UseRouting();
 
+app.UseAuthentication();
 app.UseAuthorization();
 
 app.MapControllerRoute(
     name: "default",
-    pattern: "{controller=Home}/{action=Index}/{id?}");
+    pattern: "{controller=Home}/{action=Index}");
 
 app.Run();
 
