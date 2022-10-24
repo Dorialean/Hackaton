@@ -13,10 +13,15 @@ namespace Hackathon.Controllers
         [HttpPost]
         public IActionResult Register(UserLogin userLogin)
         {
-            return RedirectToAction("Verification", "Login");
+            return RedirectToAction("Auth");
         }
-
-        public IActionResult Login(UserLogin userLogin)
+        [HttpGet]
+        public IActionResult Auth()
+        {
+            return View();
+        }
+        [HttpPost]
+        public IActionResult Auth(UserLogin userLogin)
         {
             return RedirectToAction("Index", "Home");
         }

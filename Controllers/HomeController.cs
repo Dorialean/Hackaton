@@ -15,21 +15,6 @@ public class HomeController : Controller
         _dbContext = dbcontext;
     }
 
-    public IActionResult Register()
-    {
-        return View();
-    }
-    [HttpPost]
-    public IActionResult Register(UserAndData userAndData)
-    {
-        var userData = userAndData.UserData;
-        var userLog = userAndData.UserLogin;
-        
-        
-        
-        return RedirectToAction("Index");
-    }
-
     public IActionResult Index()
     {
         

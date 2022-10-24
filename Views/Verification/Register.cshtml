@@ -11,7 +11,7 @@
 <div class="row rounded btn-light mt-3">
     <h1 class="row">Регистрация</h1>
     <div class="col">
-        @using (Html.BeginForm("Verification", "Register", FormMethod.Post, new { @Class = "container" }))
+            @using (Html.BeginForm("Register", "Verification", FormMethod.Post, new { @Class = "container" }))
         {
             @Html.Label("Логин")
             @Html.TextBoxFor(m => m.Username, new { @Class="row form-control mb-4" })

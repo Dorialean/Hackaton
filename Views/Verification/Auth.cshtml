@@ -1,6 +1,6 @@
 ﻿@model UserLogin
 @{
-    ViewBag["Title"] = "Вход";
+    ViewData["Title"] = "Вход";
 }
 
 <div class="row">
@@ -9,7 +9,7 @@
 <div class="row rounded btn-light mt-3">
     <h1 class="row">Вход в аккаунт</h1>
     <div class="col">
-        @using (Html.BeginForm("Verification", "Register", FormMethod.Post, new { @Class = "container" }))
+        @using (Html.BeginForm("Verification", "Auth", FormMethod.Post, new { @Class = "container" }))
         {
             @Html.Label("Логин")
             @Html.TextBoxFor(m => m.Username, new { @Class="row form-control mb-4" })
