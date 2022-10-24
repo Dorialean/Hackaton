@@ -11,7 +11,12 @@ namespace Hackathon.Controllers
             return View();
         }
         [HttpPost]
-        public IActionResult Register(UserAndData info)
+        public IActionResult Register(UserLogin userLogin)
+        {
+            return RedirectToAction("Index", "Home");
+        }
+
+        public IActionResult Login(UserLogin userLogin)
         {
             return RedirectToAction("Index", "Home");
         }

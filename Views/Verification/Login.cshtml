@@ -1,15 +1,13 @@
 ﻿@model UserLogin
-
 @{
-    ViewData["Title"] = "Страница регистрации";
+    ViewBag["Title"] = "Вход";
 }
-
 
 <div class="row">
     <img class="float-start" style="max-height:100px;max-width:100px;" src="~/img/chlogo.svg" asp-append-version=true />
-<div/>
+<div />
 <div class="row rounded btn-light mt-3">
-    <h1 class="row">Регистрация</h1>
+    <h1 class="row">Вход в аккаунт</h1>
     <div class="col">
         @using (Html.BeginForm("Verification", "Register", FormMethod.Post, new { @Class = "container" }))
         {
@@ -19,15 +17,15 @@
             @Html.Label("Пароль")
             @Html.PasswordFor(m => m.Password, new { @Class="row form-control" })
 
-            <input class="mt-5" type="submit" value="Отправить" />               
+            <input class="mt-5" type="submit" value="Отправить" />
         }
     </div>
     <div class="col">
-        <p class="row align-content-center" >Учебная платформа для <br/>
-            просмотра и загрузки лекций. <br/>
-            LMS - буп бип рандомный текст</p>
+        <p class="row align-content-center">
+            Учебная платформа для <br />
+            просмотра и загрузки лекций. <br />
+            LMS - буп бип рандомный текст
+        </p>
         <img class="row float-end" style="max-height:350px;max-width:350px;" src="~/img/panda.png" asp-append-version=true />
     </div>
 </div>
-
-
