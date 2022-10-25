@@ -1,6 +1,7 @@
 ﻿using System.Diagnostics;
 using Microsoft.AspNetCore.Mvc;
 using Hackathon.Models;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.EntityFrameworkCore;
 
 namespace Hackathon.Controllers;
@@ -20,27 +21,38 @@ public class HomeController : Controller
         return View();
     }
     
+    [Authorize]
     public IActionResult Dashboard()
     {
         return View();
     }
-
+    
+    [Authorize]
     public IActionResult Courses()
     {
         return View();
     }
-
+    
+    [Authorize]
     public IActionResult Forum()
     {
         return View();
     }
-
+    
+    [Authorize]
     public IActionResult Timetable()
     {
         return View();
     }
-
+    [HttpGet]
     public IActionResult UserSpace()
+    {
+        return RedirectToAction("Auth","Verification");
+    }
+    
+    [Authorize]
+    [HttpPost]
+    public IActionResult UserSpace(UserLogin userLogin)
     {
         return View();
     }

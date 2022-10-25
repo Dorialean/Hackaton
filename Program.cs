@@ -8,8 +8,12 @@ var builder = WebApplication.CreateBuilder(args);
 // Add services to the container.
 builder.Services.AddControllersWithViews();
 builder.Services.AddAuthentication(CookieAuthenticationDefaults.AuthenticationScheme)
-    .AddCookie(options => options.LoginPath = "/Verification/Auth");
+    .AddCookie(options =>
+    {
+        options.LoginPath = "/Verification/Auth";
+    });
 builder.Services.AddAuthorization();
+builder.Services.AddHttpContextAccessor();
 
 //Which connection string use to connect to PostgreSQL
 if (Environment.OSVersion.ToString() == "Microsoft Windows NT 10.0.19043.0")
