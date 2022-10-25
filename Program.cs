@@ -16,7 +16,7 @@ if (Environment.OSVersion.ToString() == "Microsoft Windows NT 10.0.19043.0")
 {
     builder.Services.AddDbContext<HackathonDbContext>(options => options.UseNpgsql(builder.Configuration.GetConnectionString("PostgresPC")));
 }
-else if (Environment.OSVersion.ToString() == "Linux")
+else if (Environment.OSVersion.ToString() == "Unix 5.15.0.52")
 {
     builder.Services.AddDbContext<HackathonDbContext>(options => options.UseNpgsql(builder.Configuration.GetConnectionString("PostgresLaptop")));
 }
