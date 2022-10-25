@@ -43,7 +43,7 @@ namespace Hackathon.Controllers
                         Username = userLogin.Username,
                         Password = sha256.ComputeHash(Encoding.ASCII.GetBytes(userLogin.Password)) //Сюда надо добавить Salt
                     });
-                    //_dbContext.SaveChanges();
+                    _dbContext.SaveChanges();
                     
                     //Cookie auth
                     var claims = new List<Claim>(){new Claim(ClaimTypes.Name,user.Username)};
