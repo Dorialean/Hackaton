@@ -60,15 +60,25 @@ namespace Hackathon.Controllers
         [HttpGet]
         public IActionResult Auth()
         {
+            if (HttpContext.User.Identity.IsAuthenticated && HttpContext.User.Identity is not null)
+            {
+                var user = _dbContext.UserLogins.FirstOrDefault(x => x.Username == HttpContext.User.Identity.Name);
+                if (user is null)
+                {
+                    return RedirectToAction("Register");
+                }
+                return RedirectToAction("UserSpace", "Home", user);
+            } 
             return View();
         }
         [HttpPost]
-        public IActionResult Auth(UserLogin userLogin)
+        public IActionResult Auth(RegisterInfo userLogin)
         {
             if (userLogin?.Username == null || userLogin?.Password == null)
                 return BadRequest(BAD_REQUEST_TEXT);
+            var user = _dbContext.UserLogins.First(x => x.Username == userLogin.Username && x.Password == Encoding.ASCII.GetBytes(userLogin.Password));
 
-            return RedirectToAction("Index", "Home");
+            return RedirectToAction("UserSpace", "Home", user);
         }
     }
 }
