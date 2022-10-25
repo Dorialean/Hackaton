@@ -17,7 +17,7 @@
         @using (Html.BeginForm("Register", "Verification", FormMethod.Post, new { @Class = "container" }))
         {
             @Html.Label("Логин")
-                @Html.TextBoxFor(m => m.Username, new { @Class="row form-control mb-4", @Placeholder="Введите логин" })
+            @Html.TextBoxFor(m => m.Username, new { @Class="row form-control mb-4", @Placeholder="Введите логин" })
 
             @Html.Label("Пароль")
             @Html.PasswordFor(m => m.Password, new { @Class="row form-control", @Placeholder="Введите пароль" })
@@ -25,6 +25,7 @@
             <input class="mt-5" type="submit" value="Отправить" />               
         }
     </div>
+    <a class="row link-dark" asp-action="Auth">Вы уже зарегистрированы?</a>
     <div class="col">
         <p class="row align-content-center" >Учебная платформа для <br/>
             просмотра и загрузки лекций. <br/>

@@ -1,9 +1,13 @@
-﻿using Hackathon.Models;
+﻿using System.Security.Claims;
+using Hackathon.Models;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
 using System.Security.Cryptography;
 using System.Text;
+using Microsoft.AspNetCore.Authentication;
+using Microsoft.AspNetCore.Authentication.Cookies;
+using Microsoft.AspNetCore.Http;
 
 namespace Hackathon.Controllers
 {
@@ -31,14 +35,26 @@ namespace Hackathon.Controllers
                 return BadRequest(BAD_REQUEST_TEXT);
             if(userLogin?.Username != null && userLogin?.Username != null)
             {
-                //Добавить проверку на существующего пользователя
-                _dbContext.UserLogins.Add(new UserLogin() 
+                if (!_dbContext.UserLogins.Select(x => x.Username).Any(x => x == userLogin.Username))
                 {
-                    Username = userLogin.Username,
-                    Password = sha256.ComputeHash(Encoding.ASCII.GetBytes(userLogin.Password)) //Сюда надо добавить Salt
-                });
+                    var user = new UserLogin(){Username = userLogin.Username, Password = sha256.ComputeHash(Encoding.ASCII.GetBytes(userLogin.Password))};
+                    _dbContext.UserLogins.Add(new UserLogin() 
+                    {
+                        Username = userLogin.Username,
+                        Password = sha256.ComputeHash(Encoding.ASCII.GetBytes(userLogin.Password)) //Сюда надо добавить Salt
+                    });
+                    //_dbContext.SaveChanges();
+                    
+                    //Cookie auth
+                    var claims = new List<Claim>(){new Claim(ClaimTypes.Name,user.Username)};
+                    ClaimsIdentity claimsIdentity = new ClaimsIdentity(claims, "Cookies");
+                    HttpContext.SignInAsync(CookieAuthenticationDefaults.AuthenticationScheme,
+                        new ClaimsPrincipal(claimsIdentity));
+                    
+                    return RedirectToAction("Auth", user);
+                }
             }
-            return RedirectToAction("Auth");
+            return RedirectToAction("Register");
         }
 
         [HttpGet]
