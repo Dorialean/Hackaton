@@ -85,7 +85,7 @@ namespace Hackathon.Controllers
                     return RedirectToAction("Register");
                 }
                 return RedirectToAction("UserSpace", "Home", user);
-            } 
+            }
             return View();
         }
         [HttpPost]
