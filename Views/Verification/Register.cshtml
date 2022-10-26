@@ -20,7 +20,7 @@
         @using (Html.BeginForm("Register", "Verification", FormMethod.Post, new { @Class = "container", @id="register" }))
         {
             @Html.Label("Логин")
-            @Html.TextBoxFor(m => m.Username, new { @Class="row form-control mb-4", @Placeholder="Введите логин", @id="email"})
+            @Html.TextBoxFor(m => m.Username, new { @Class="row form-control mb-4", @Placeholder="Введите почту", @id="email"})
 
             @Html.Label("Пароль")
             @Html.PasswordFor(m => m.Password, new { @Class="row form-control", @Placeholder="Введите пароль", @id="pass" })
