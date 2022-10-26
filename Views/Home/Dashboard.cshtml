@@ -1,3 +1,48 @@
-﻿@{
+﻿@Model
+@model UserPageAndCoursesAndLectures
+@{
     ViewData["Title"] = "Dashboard";
+    var nowDate = DateTime.Now;
+    
 }
+
+<div class="row">
+    <div class="col">
+        <p>Привет, @Html.DisplayFor(userModel => userModel.UserLogin.Username) </p>
+        <h1><strong>Добро пожаловать</strong></h1>
+    </div>
+    <div class="col">
+        <img src="#">
+        <input type="text">
+    </div>
+</div>
+<div class="row">
+    <div class="col">
+        <p><strong>Сегодня @nowDate.ToString("M/d/yyyy")</strong></p>
+        @foreach (var lect in Model?.allLectures)
+        {
+            <div class="row">
+                @lect.Title
+                @lect.Description
+            </div>                
+        }
+    </div>
+    <div class="col">
+        <h3>@nowDate.Month.ToString()</h3>
+        <input type="datetime"/>
+    </div>
+</div>
+<div class="row">
+    <div class="col">
+        <h3 class="cyberhacker-orange-text">Мои курсы</h3>
+    </div>
+    <div class="row">
+    @foreach (var c in Model?.allCourses)
+    {
+        <div class="row">
+            @c.Title
+            @c.Description
+        </div>
+    }
+    </div>
+</div>

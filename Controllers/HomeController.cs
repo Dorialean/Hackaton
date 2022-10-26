@@ -1,4 +1,5 @@
 ﻿using System.Diagnostics;
+using System.Security.Claims;
 using Microsoft.AspNetCore.Mvc;
 using Hackathon.Models;
 using Microsoft.AspNetCore.Authorization;
@@ -24,7 +25,15 @@ public class HomeController : Controller
     [Authorize]
     public IActionResult Dashboard()
     {
-        return View();
+
+        var authifo = ControllerContext.HttpContext.User.Identity?.Name;
+        return View(new UserPageAndCoursesAndLectures()
+        {
+            UserLogin = _dbContext.UserLogins.First(u => u.Username == authifo),
+            UserData = null,
+            allCourses = _dbContext.Courses.ToList(),
+            allLectures = _dbContext.Lectures.ToList()
+        });
     }
     
     [Authorize]
@@ -45,14 +54,14 @@ public class HomeController : Controller
         return View();
     }
     [HttpGet]
-    public IActionResult UserSpace()
+    public IActionResult UserSpace(UserLogin userLogin)
     {
-        return RedirectToAction("Auth","Verification");
+        return View();
     }
     
     [Authorize]
     [HttpPost]
-    public IActionResult UserSpace(UserLogin userLogin)
+    public IActionResult UserSpace(UserPageAndCoursesAndLectures userLogin)
     {
         return View();
     }
