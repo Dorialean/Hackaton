@@ -1,7 +1,11 @@
-﻿using Hackathon.Models;
+﻿using System.Text;
+using Hackathon.Models;
 using Microsoft.AspNetCore.Authentication.Cookies;
+using Microsoft.AspNetCore.Authentication.JwtBearer;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Configuration;
+using Microsoft.IdentityModel.Tokens;
 
 var builder = WebApplication.CreateBuilder(args);
 
@@ -12,6 +16,26 @@ builder.Services.AddAuthentication(CookieAuthenticationDefaults.AuthenticationSc
     {
         options.LoginPath = "/Verification/Auth";
     });
+
+//Не успели доделать jwt аутентификацию (если раскомементить, оно, конечно, работает, но не связывает с бд на userPage)
+//builder.Services.AddAuthentication(JwtBearerDefaults.AuthenticationScheme)
+//    .AddJwtBearer(options =>
+//        {
+//            options.RequireHttpsMetadata = false;
+//            options.Audience = "http://localhost:5001/";
+//            options.Authority = "http://localhost:5000/";
+//        });
+
+//builder.Services.AddAuthorization(options =>
+//{
+//    var defaultAuthorizationPolicyBuilder = new AuthorizationPolicyBuilder(
+//        CookieAuthenticationDefaults.AuthenticationScheme,
+//        JwtBearerDefaults.AuthenticationScheme);
+//    defaultAuthorizationPolicyBuilder =
+//        defaultAuthorizationPolicyBuilder.RequireAuthenticatedUser();
+//    options.DefaultPolicy = defaultAuthorizationPolicyBuilder.Build();
+//});
+
 builder.Services.AddAuthorization();
 builder.Services.AddHttpContextAccessor();
 
