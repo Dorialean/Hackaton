@@ -86,6 +86,7 @@ namespace Hackathon.Controllers
                 }
                 return RedirectToAction("Index", "Home", user);
             } 
+
             return View();
         }
         [HttpPost]

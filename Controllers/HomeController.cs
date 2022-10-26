@@ -63,11 +63,27 @@ public class HomeController : Controller
     [HttpPost]
     public IActionResult UserSpace(UserPageAndCoursesAndLectures userLogin)
     {
-        return View();
+        var userAndData = new UserAndData(){ UserLogixn = userLogin};
+        return View(userAndData);
     }
-
-
-
+    
+    [Authorize]
+    [HttpPost]
+    public IActionResult UserSpaceSave(UserAndData userAndData)
+    {
+        var userId = _dbContext.UserLogins.FirstOrDefault(x => x.Username == HttpContext.User.Identity.Name).UserId;
+        var user = new UserData()
+        {
+            UserDataId = userId, FirstName = userAndData.UserData.FatherName,
+            LastName = userAndData.UserData.LastName, 
+            FatherName = userAndData.UserData.FatherName
+        };
+        _dbContext.UserData.Add(user);
+        _dbContext.SaveChanges();
+        
+        return RedirectToAction("Index", "Home");
+    }
+    
     [ResponseCache(Duration = 0, Location = ResponseCacheLocation.None, NoStore = true)]
     public IActionResult Error()
     {

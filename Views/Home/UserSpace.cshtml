@@ -1,3 +1,32 @@
 ﻿@{
     ViewData["Title"] = "Личный кабинет";
 }
+@model UserAndData
+
+<div class="row"></div>
+<div class="row rounded btn-light mt-3">
+    <h1 class="row">Личные данные</h1>
+    <div class="col">
+        @using (Html.BeginForm("UserSpaceSave", "Home", FormMethod.Post, new { @Class = "container" }))
+        {
+            @Html.Label("Имя")
+            @Html.TextBoxFor(m => m.UserData.FirstName, new { @Class="row form-control mb-3" })
+
+            @Html.Label("Фамилия")
+            @Html.TextBoxFor(m => m.UserData.LastName, new { @Class="row form-control mb-3" })
+            
+            @Html.Label("Отчество")
+            @Html.TextBoxFor(m => m.UserData.FatherName, new { @Class="row form-control mb-3" })
+            
+            <input class="mt-5" type="submit" value="Сохранить" />
+        }
+    </div>
+    <div class="col">
+        <p class="row text-center">
+            Все данные будут храниться в зашифрованном виде<br />
+            <br />
+            Ваша конфиденциальность - наш приоритет<br />
+        </p>
+        <img class="row float-end" style="max-height:350px;max-width:350px;" src="~/img/panda.png" asp-append-version=true />
+    </div>
+</div>
