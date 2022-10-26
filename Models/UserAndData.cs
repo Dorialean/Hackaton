@@ -3,7 +3,7 @@ namespace Hackathon.Models
 {
     public class UserAndData
     {
-        public UserLogin UserLogixn { get; set; }
+        public UserLogin UserLogin { get; set; }
         public UserData UserData { get; set; }
     }
 }

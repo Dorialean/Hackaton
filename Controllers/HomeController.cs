@@ -63,7 +63,7 @@ public class HomeController : Controller
     [HttpPost]
     public IActionResult UserSpace(UserPageAndCoursesAndLectures userLogin)
     {
-        var userAndData = new UserAndData(){ UserLogixn = userLogin};
+        var userAndData = new UserAndData(){ UserLogin = userLogin.UserLogin};
         return View(userAndData);
     }
     
