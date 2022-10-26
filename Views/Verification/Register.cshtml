@@ -1,6 +1,9 @@
 ﻿@model RegisterInfo
 @using System.Security.Cryptography
-@using System.Text
+@{
+    Layout = "_Layout";
+}
+
 @{
     ViewData["Title"] = "Страница регистрации";
     var sha = SHA256.Create();
@@ -14,13 +17,13 @@
 <div class="row rounded btn-light mt-3">
     <h1 class="row">Регистрация</h1>
     <div class="col">
-        @using (Html.BeginForm("Register", "Verification", FormMethod.Post, new { @Class = "container" }))
+        @using (Html.BeginForm("Register", "Verification", FormMethod.Post, new { @Class = "container", @id="register" }))
         {
             @Html.Label("Логин")
-            @Html.TextBoxFor(m => m.Username, new { @Class="row form-control mb-4", @Placeholder="Введите логин" })
+            @Html.TextBoxFor(m => m.Username, new { @Class="row form-control mb-4", @Placeholder="Введите логин", @id="email"})
 
             @Html.Label("Пароль")
-            @Html.PasswordFor(m => m.Password, new { @Class="row form-control", @Placeholder="Введите пароль" })
+            @Html.PasswordFor(m => m.Password, new { @Class="row form-control", @Placeholder="Введите пароль", @id="pass" })
 
             <input class="mt-5" type="submit" value="Отправить" />               
         }
