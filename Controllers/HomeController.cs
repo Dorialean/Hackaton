@@ -25,7 +25,7 @@ public class HomeController : Controller
     public IActionResult Dashboard()
     {
         return View();
-    }
+    }   
     
     [Authorize]
     public IActionResult Courses()
@@ -47,18 +47,34 @@ public class HomeController : Controller
     [HttpGet]
     public IActionResult UserSpace()
     {
-        return RedirectToAction("Auth","Verification");
+        return View();
     }
     
     [Authorize]
     [HttpPost]
     public IActionResult UserSpace(UserLogin userLogin)
     {
-        return View();
+        var userAndData = new UserAndData(){ UserLogixn = userLogin};
+        return View(userAndData);
     }
-
-
-
+    
+    [Authorize]
+    [HttpPost]
+    public IActionResult UserSpaceSave(UserAndData userAndData)
+    {
+        var userId = _dbContext.UserLogins.FirstOrDefault(x => x.Username == HttpContext.User.Identity.Name).UserId;
+        var user = new UserData()
+        {
+            UserDataId = userId, FirstName = userAndData.UserData.FatherName,
+            LastName = userAndData.UserData.LastName, 
+            FatherName = userAndData.UserData.FatherName
+        };
+        _dbContext.UserData.Add(user);
+        _dbContext.SaveChanges();
+        
+        return RedirectToAction("Index", "Home");
+    }
+    
     [ResponseCache(Duration = 0, Location = ResponseCacheLocation.None, NoStore = true)]
     public IActionResult Error()
     {
