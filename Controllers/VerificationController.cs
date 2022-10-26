@@ -84,8 +84,9 @@ namespace Hackathon.Controllers
                 {
                     return RedirectToAction("Register");
                 }
-                return RedirectToAction("UserSpace", "Home", user);
-            }
+                return RedirectToAction("Index", "Home", user);
+            } 
+
             return View();
         }
         [HttpPost]
@@ -95,7 +96,7 @@ namespace Hackathon.Controllers
                 return BadRequest(BAD_REQUEST_TEXT);
             var user = _dbContext.UserLogins.First(x => x.Username == userLogin.Username && x.Password == Encoding.ASCII.GetBytes(userLogin.Password));
 
-            return RedirectToAction("UserSpace", "Home", user);
+            return RedirectToAction("DashBoard", "Home");
         }
     }
 }
