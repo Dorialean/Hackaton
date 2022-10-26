@@ -50,7 +50,7 @@ else if (Environment.OSVersion.ToString() == "Unix 5.15.0.52")
 }
 else
 {
-    builder.Services.AddDbContext<HackathonDbContext>(options => options.UseNpgsql(builder.Configuration.GetConnectionString("PostgresLaptop")));
+    builder.Services.AddDbContext<HackathonDbContext>(options => options.UseNpgsql(builder.Configuration.GetConnectionString("PostgresMac")));
 }
 
 
