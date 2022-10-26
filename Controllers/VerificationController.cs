@@ -28,6 +28,7 @@ namespace Hackathon.Controllers
         {
             return View();
         }
+        //Cookie auth
         [HttpPost]
         public IActionResult Register(RegisterInfo userLogin)
         {
@@ -44,8 +45,6 @@ namespace Hackathon.Controllers
                         Password = sha256.ComputeHash(Encoding.ASCII.GetBytes(userLogin.Password)) //Сюда надо добавить Salt
                     });
                     _dbContext.SaveChanges();
-                    
-                    //Cookie auth
                     var claims = new List<Claim>(){new Claim(ClaimTypes.Name,user.Username)};
                     ClaimsIdentity claimsIdentity = new ClaimsIdentity(claims, "Cookies");
                     HttpContext.SignInAsync(CookieAuthenticationDefaults.AuthenticationScheme,
@@ -55,6 +54,24 @@ namespace Hackathon.Controllers
                 }
             }
             return RedirectToAction("Register");
+        }
+
+        [HttpPost]
+        public IActionResult Token(RegisterInfo userLogin)
+        {
+            if (userLogin?.Username == null || userLogin?.Password == null)
+                return BadRequest(BAD_REQUEST_TEXT);
+            if (userLogin?.Username != null && userLogin?.Username != null)
+            {
+                var claims = new List<Claim>
+                {
+                    new Claim(ClaimsIdentity.DefaultNameClaimType, userLogin.Username)
+                };
+                
+                ClaimsIdentity claimsIdentity =
+                    new ClaimsIdentity(claims,"Token");
+            }
+            return RedirectToAction("Auth","Verification");
         }
 
         [HttpGet]
