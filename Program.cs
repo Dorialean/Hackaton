@@ -15,6 +15,7 @@ builder.Services.AddAuthentication(CookieAuthenticationDefaults.AuthenticationSc
     .AddCookie(options =>
     {
         options.LoginPath = "/Verification/Auth";
+        options.LogoutPath = "/Verification/LogOut";
     });
 
 //Не успели доделать jwt аутентификацию (если раскомементить, оно, конечно, работает, но не связывает с бд на userPage)

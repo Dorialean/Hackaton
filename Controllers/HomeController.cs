@@ -54,6 +54,7 @@ public class HomeController : Controller
         return View();
     }
     [HttpGet]
+    [Authorize]
     public IActionResult UserSpace(UserLogin userLogin)
     {
         return View();

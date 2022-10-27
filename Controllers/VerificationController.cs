@@ -41,6 +41,7 @@ namespace Hackathon.Controllers
                     var user = new UserLogin(){Username = userLogin.Username, Password = sha256.ComputeHash(Encoding.ASCII.GetBytes(userLogin.Password))};
                     _dbContext.UserLogins.Add(new UserLogin() 
                     {
+                        UserId = System.Guid.NewGuid(),
                         Username = userLogin.Username,
                         Password = sha256.ComputeHash(Encoding.ASCII.GetBytes(userLogin.Password)) //Сюда надо добавить Salt
                     });
@@ -94,9 +95,22 @@ namespace Hackathon.Controllers
         {
             if (userLogin?.Username == null || userLogin?.Password == null)
                 return BadRequest(BAD_REQUEST_TEXT);
-            var user = _dbContext.UserLogins.First(x => x.Username == userLogin.Username && x.Password == Encoding.ASCII.GetBytes(userLogin.Password));
+            if (HttpContext.User.Identity.IsAuthenticated && HttpContext.User.Identity is not null)
+            {
+                var user = _dbContext.UserLogins.FirstOrDefault(x => x.Username == HttpContext.User.Identity.Name);
+                if (user is null)
+                {
+                    return RedirectToAction("Register");
+                }
+                return RedirectToAction("DashBoard", "Home");
+            }
+            return RedirectToAction("Auth", "Verification");
+        }
 
-            return RedirectToAction("DashBoard", "Home");
+        public IActionResult LogOut()
+        {
+            HttpContext.SignOutAsync(CookieAuthenticationDefaults.AuthenticationScheme);
+            return RedirectToAction("Index", "Home");
         }
     }
 }

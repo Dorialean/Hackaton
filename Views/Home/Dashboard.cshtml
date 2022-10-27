@@ -7,29 +7,96 @@
 }
 
 <div class="row">
-    <div class="col">
+    <div class="col btn-light">
         <p>Привет, @Html.DisplayFor(userModel => userModel.UserLogin.Username) </p>
         <h1><strong>Добро пожаловать</strong></h1>
     </div>
     <div class="col">
-        <img src="#">
-        <input type="text">
+        <img class="rounded float-left" src="~/img/search-black.png" style="max-width:30px;max-height: 30px">
+        <input type="text" placeholder="Поиск">
     </div>
 </div>
 <div class="row">
-    <div class="col">
-        <p><strong>Сегодня @nowDate.ToString("M/d/yyyy")</strong></p>
+    <div class="col-8">
+        <p class="ms-2"><strong>Сегодня @nowDate.Day.ToString()+@nowDate.Month.ToString()</strong></p>
         @foreach (var lect in Model?.allLectures)
         {
-            <div class="row">
-                @lect.Title
-                @lect.Description
+            <div class="row ms-2 me-2">
+                <p class="me-1"><strong>@lect.Title</strong></p>
+                <p class="fw-light">@lect.Description<p>
             </div>                
         }
     </div>
-    <div class="col">
+    <div class="col-4 btn-light">
         <h3>@nowDate.Month.ToString()</h3>
-        <input type="datetime"/>
+        <table class="calendar">
+            <thead>
+            <th>Пн</th>
+            <th>ВТ</th>
+            <th>СР</th>
+            <th>ЧТ</th>
+            <th>ПТ</th>
+            <th>СБ</th>
+            <th>ВС</th>
+            </thead>
+            <tbody>
+                <tr>
+                    <td></td>
+                    <td></td>
+                    <td></td>
+                    <td></td>
+                    <td></td>
+                    <td>1</td>
+                    <td>2</td>
+                </tr>
+                <tr></tr>
+                <tr>
+                    <td>3</td>
+                    <td>4</td>
+                    <td>5</td>
+                    <td>6</td>
+                    <td>7</td>
+                    <td>8</td>
+                    <td>9</td>
+                </tr>
+                <tr>
+                    <td>10</td>
+                    <td>11</td>
+                    <td>12</td>
+                    <td>13</td>
+                    <td>14</td>
+                    <td>15</td>
+                    <td>16</td>
+                </tr>
+                <tr>
+                    <td>17</td>
+                    <td>18</td>
+                    <td>19</td>
+                    <td>20</td>
+                    <td>21</td>
+                    <td>22</td>
+                    <td>23</td>
+                </tr>
+                <tr>
+                    <td>24</td>
+                    <td>25</td>
+                    <td>26</td>
+                    <td>27</td>
+                    <td>28</td>
+                    <td>29</td>
+                    <td>30</td>
+                </tr>
+                <tr>
+                    <td>31</td>
+                    <td>1</td>
+                    <td>2</td>
+                    <td>3</td>
+                    <td>4</td>
+                    <td>5</td>
+                    <td>6</td>
+                </tr>
+            </tbody>
+        </table>
     </div>
 </div>
 <div class="row">
@@ -39,9 +106,9 @@
     <div class="row">
     @foreach (var c in Model?.allCourses)
     {
-        <div class="row">
-            @c.Title
-            @c.Description
+        <div class="row ms-2 me-2">
+            <p class="me-1"><strong>@c.Title</strong></p>
+            <p class="fw-light">@c.Description</p>
         </div>
     }
     </div>
